@@ -4,6 +4,8 @@ const {
   getVideogameByName,
   getGameById,
   createGame,
+  getVideogamesDb,
+  getAllGames,
 } = require("./controller");
 const server = express();
 
@@ -11,7 +13,16 @@ const server = express();
 //   res.json({ msg: "Everythig OK" });
 // });
 
-server.get("/", async (req, res) => {
+// server.get("/db", async (req, res) => {
+//   try {
+//     const game = await getVideogamesDb();
+//     res.status(200).json(game);
+//   } catch (error) {
+//     res.status(400).json({ msg: "Upss, something went wrong" });
+//   }
+// });
+
+server.get("/", (req, res) => {
   const { name } = req.query;
   try {
     if (name) {
@@ -19,8 +30,9 @@ server.get("/", async (req, res) => {
         return res.status(202).json(resp);
       });
     } else {
-      const videogames = await getVideogamesApi();
-      res.status(202).json(videogames);
+      getAllGames().then((resp) => {
+        return res.status(200).json(resp);
+      });
     }
   } catch (error) {
     res.status(404).json({ msg: "something went wrong", error });

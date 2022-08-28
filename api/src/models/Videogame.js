@@ -20,6 +20,11 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
+      image: {
+        type: DataTypes.TEXT,
+        defaultValue:
+          "https://images-na.ssl-images-amazon.com/images/I/71Hx+MsemgL.jpg",
+      },
       released: {
         type: DataTypes.DATEONLY,
         defaultValue: DataTypes.NOW,

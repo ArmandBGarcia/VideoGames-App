@@ -1,13 +1,20 @@
+import { GET_GAMES } from "./actions";
+
 const initialState = {
   videogames: [],
 };
 
-const rootReducer = (state, action) => {
+const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case :
-    //   break;
+    case GET_GAMES:
+      return {
+        ...state,
+        videogames: action.payload,
+      };
 
     default:
-      break;
+      return state;
   }
 };
+
+export default rootReducer;
