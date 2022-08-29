@@ -4,7 +4,7 @@ import s from "./style/Card.module.css";
 
 const Cards = ({ games }) => {
   let id = 0;
-  console.log({ games });
+  // console.log({ games });
   return (
     <div className={s.cards}>
       {games.map((g) => (

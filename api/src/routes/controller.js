@@ -86,7 +86,7 @@ function getVideogameByName(game) {
     .then((resp) => {
       const games = resp.data.results.map((d) => {
         return {
-          id: d.name,
+          id: d.id,
           name: d.name,
           image: d.background_image,
           genres: d.genres.map((d) => d.name),
