@@ -2,46 +2,49 @@ require("dotenv").config();
 const axios = require("axios");
 const { Videogame, Genre } = require("../db");
 const API_KEY = process.env.API_KEY;
+let containerMaster = [];
 
 const getVideogamesApi = async () => {
-  const url = `https://api.rawg.io/api/games?key=${API_KEY}&page_size=40`;
-  const response = await axios.get(url);
-  const response2 = await axios.get(response.data.next);
-  const response3 = await axios.get(
-    `https://api.rawg.io/api/games?key=${API_KEY}&page_size=20`
-  );
+  if (!containerMaster.length) {
+    const url = `https://api.rawg.io/api/games?key=${API_KEY}&page_size=40`;
+    const response = await axios.get(url);
+    const response2 = await axios.get(response.data.next);
+    const response3 = await axios.get(
+      `https://api.rawg.io/api/games?key=${API_KEY}&page_size=20`
+    );
 
-  const result1 = response.data.results.map((data) => {
-    return {
-      id: data.id,
-      name: data.name,
-      image: data.background_image,
-      genres: data.genres.map((g) => g.name),
-    };
-  });
+    const result1 = response.data.results.map((data) => {
+      return {
+        id: data.id,
+        name: data.name,
+        image: data.background_image,
+        genres: data.genres.map((g) => g.name),
+      };
+    });
 
-  const result2 = response2.data.results.map((data) => {
-    return {
-      id: data.id,
-      name: data.name,
-      image: data.background_image,
-      genres: data.genres.map((g) => g.name),
-    };
-  });
+    const result2 = response2.data.results.map((data) => {
+      return {
+        id: data.id,
+        name: data.name,
+        image: data.background_image,
+        genres: data.genres.map((g) => g.name),
+      };
+    });
 
-  const result3 = response3.data.results.map((data) => {
-    return {
-      id: data.id,
-      name: data.name,
-      image: data.background_image,
-      genres: data.genres.map((g) => g.name),
-    };
-  });
+    const result3 = response3.data.results.map((data) => {
+      return {
+        id: data.id,
+        name: data.name,
+        image: data.background_image,
+        genres: data.genres.map((g) => g.name),
+      };
+    });
 
-  const container = [...result1, ...result2, ...result3];
-
-  console.log(container.length);
-  return container;
+    containerMaster = [...result1, ...result2, ...result3];
+    return containerMaster;
+  } else {
+    return containerMaster;
+  }
 };
 
 const getVideogamesDb = async () => {

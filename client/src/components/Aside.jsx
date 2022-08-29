@@ -1,13 +1,14 @@
 import React from "react";
-import SortByGenres from "../filters/SortByGenres";
+import FilterByGenres from "../filters/FilterByGenres";
+import SortByName from "../filters/SortByName";
 import s from "./style/Aside.module.css";
 
 const Aside = () => {
   return (
     <div>
       <aside className={s.container}>
-        <SortByGenres />
-        <p>filtrar por... </p>
+        <FilterByGenres />
+        <SortByName />
         <p>filtrar por... </p>
       </aside>
     </div>
