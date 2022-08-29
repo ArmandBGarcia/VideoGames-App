@@ -1,7 +1,7 @@
 import axios from "axios";
 export const GET_GAMES = "GET_GAMES";
 export const GET_GAMES_BY_NAME = "GET_GAMES_BY_NAME";
-export const SORT_BY_GENRE = "SORT_BY_GENRE";
+export const FILTER_BY_GENRE = "FILTER_BY_GENRE";
 
 export const getVideogames = () => {
   const url = "http://localhost:3001/videogames";
@@ -38,9 +38,15 @@ export const sortByGenre = (genre) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(url);
-      console.log(response.data);
-      const game = response.data.genres.map((genre) => genre.name);
+      console.log("response", response.data);
+      const game = response.data.filter(
+        (d) => d.genres.filter((g) => g === genre).length
+      );
       console.log({ game });
+      dispatch({
+        type: FILTER_BY_GENRE,
+        payload: game,
+      });
     } catch (error) {
       return alert("genre not found");
     }
