@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import Loader from "../components/Loader";
 import { getGameById } from "../redux/actions";
 import s from "./styles/Game.module.css";
 

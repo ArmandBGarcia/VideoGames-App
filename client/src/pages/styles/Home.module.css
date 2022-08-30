@@ -1,7 +1,7 @@
 .container {
   width: 1200px;
   margin: 0 auto;
-  border: solid 5px yellow;
+  /* border: solid 5px yellow; */
   display: flex;
   flex-direction: row;
   align-content: end;

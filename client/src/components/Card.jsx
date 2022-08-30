@@ -9,15 +9,15 @@ const Card = ({ key, id, name, image, genres }) => {
       {/* <p>{key}</p> */}
       <Link to={`/game/${id}`} className={s.image}>
         <img src={image} alt={name} />
+        <div>
+          <h4>{name}</h4>
+        </div>
+        <div className={s.genres}>
+          {genres?.map((g) => (
+            <p>{g}</p>
+          ))}
+        </div>
       </Link>
-      <div>
-        <h4>{name}</h4>
-      </div>
-      <div className={s.genres}>
-        {genres?.map((g) => (
-          <p>{g}</p>
-        ))}
-      </div>
     </div>
   );
 };

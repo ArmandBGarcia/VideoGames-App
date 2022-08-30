@@ -27,6 +27,11 @@ body {
   color: #fff;
 }
 
+.card:hover {
+  border: solid 2px #5c7cfa;
+  cursor: pointer;
+}
+
 .genres {
   display: flex;
   justify-content: center;
@@ -41,6 +46,6 @@ body {
   margin-top: 5px;
 }
 
-.image:hover {
+/* .image:hover {
   cursor: pointer;
-}
+} */
