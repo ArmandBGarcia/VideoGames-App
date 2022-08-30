@@ -1,14 +1,59 @@
 .container {
-  border: solid blue 5px;
+  /* border: solid blue 5px; */
+}
+
+.containerCard {
+  border: solid #5c7cfa 2px;
+  border-radius: 15px;
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 1000px;
 }
 
 .card {
-  border: solid red 5px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  column-gap: 50px;
+  height: 300px;
 }
 
 .image {
-  height: 500px;
+  height: 280px;
   width: auto;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.info {
+  margin-top: 30px;
+  font-size: 24px;
+}
+
+.infoContainres {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.nameColor {
+  color: #5c7cfa;
+}
+
+.name {
+  margin-bottom: 15px;
+  text-transform: capitalize;
+  letter-spacing: -1px;
+  font-weight: 500;
+  color: #5c7cfa;
+}
+
+.genres {
+  margin-top: 30px;
+  font-size: 24px;
+  text-transform: capitalize;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 24px;
 }

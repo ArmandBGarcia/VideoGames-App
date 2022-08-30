@@ -13,24 +13,41 @@ const Game = () => {
     dispatch(getGameById(id));
   }, [dispatch, id]);
 
-  // console.log({ state });
+  console.log({ state });
 
   return (
     <div className={s.container}>
       {state.map((data) => (
-        <div className={s.card}>
-          <div>
-            <img src={data.image} alt={data.name} className={s.image} />
+        <div className={s.containerCard}>
+          <div className={s.card}>
+            <div>
+              <img src={data.image} alt={data.name} className={s.image} />
+            </div>
+            <div className={s.info}>
+              <h4 className={s.name}>{data.name}</h4>
+              <div className={s.infoContainres}>
+                <p className={s.nameColor}>Relased date: </p>
+                <p>{data.released}</p>
+              </div>
+              <div className={s.infoContainres}>
+                <p className={s.nameColor}>Rating: </p>
+                <p>{data.rating}</p>
+              </div>
+              <div className={s.infoContainres}>
+                <p className={s.nameColor}>Platforms: </p>
+                <p>{data.platforms}</p>
+              </div>
+            </div>
+            <div className={s.genres}>
+              <h4 className={s.name}>Genres</h4>
+              {data.genres?.map((g) => (g.name ? <p>{g.name}</p> : <p>{g}</p>))}
+            </div>
           </div>
-          <div>
-            <h4>{data.name}</h4>
-            <p>Relased date: {data.released}</p>
-            <p>Rating: {data.rating}</p>
-            <p>Platforms: {data.platforms}</p>
-            <p>Description: {data.description}</p>
-          </div>
-          <div>
-            {data.genres?.map((g) => (g.name ? <p>{g.name}</p> : <p>{g}</p>))}
+          <div className={s.description}>
+            <div className={s.infoContainres}>
+              <p className={s.nameColor}>Description: </p>
+              <p>{data.description}</p>
+            </div>
           </div>
         </div>
       ))}
