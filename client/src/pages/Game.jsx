@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getGameById } from "../redux/actions";
 import s from "./styles/Game.module.css";
 
@@ -17,6 +17,11 @@ const Game = () => {
 
   return (
     <div className={s.container}>
+      <Link to="/home">
+        <button className={s.btn}>
+          <ion-icon name="arrow-undo"></ion-icon>
+        </button>
+      </Link>
       {state.map((data) => (
         <div className={s.containerCard}>
           <div className={s.card}>
