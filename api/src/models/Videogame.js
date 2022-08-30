@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
       image: {
         type: DataTypes.TEXT,
         defaultValue:
-          "https://images-na.ssl-images-amazon.com/images/I/71Hx+MsemgL.jpg",
+          "https://media.gqmagazine.fr/photos/61fa5fd36ec921138030b144/1:1/w_1600%2Cc_limit/GettyImages-1309172130.jpg",
       },
       released: {
         type: DataTypes.DATEONLY,

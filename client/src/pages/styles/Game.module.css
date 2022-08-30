@@ -1,0 +1,14 @@
+.container {
+  border: solid blue 5px;
+}
+
+.card {
+  border: solid red 5px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.image {
+  height: 500px;
+  width: auto;
+}

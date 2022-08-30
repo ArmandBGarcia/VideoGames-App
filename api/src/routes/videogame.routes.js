@@ -52,8 +52,8 @@ server.get("/:id", (req, res) => {
 
 server.post("/", async (req, res) => {
   try {
-    await createGame(req.body);
-    res.status(200).send("Game crated succesfuly");
+    const game = await createGame(req.body);
+    res.status(200).json(game);
   } catch (error) {
     res.status(400).json({ msg: "Something went wrong", error });
   }

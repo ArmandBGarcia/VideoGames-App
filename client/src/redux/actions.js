@@ -3,6 +3,9 @@ export const GET_GAMES = "GET_GAMES";
 export const GET_GAMES_BY_NAME = "GET_GAMES_BY_NAME";
 export const FILTER_BY_GENRE = "FILTER_BY_GENRE";
 export const SORT_BY_NAME = "SORT_BY_NAME";
+export const GET_GAME_CREATED = "GET_GAME_CREATED";
+export const GET_GAME_API = "GET_GAME_API";
+export const GET_GAME_BY_ID = "GET_GAME_BY_ID";
 
 export const getVideogames = () => {
   const url = "http://localhost:3001/videogames";
@@ -95,5 +98,56 @@ export const sortByName = (value) => {
         }
       })
       .catch((e) => alert("Sorry, there was a problem"));
+  };
+};
+
+export const filterByDb = () => {
+  const url = "http://localhost:3001/videogames";
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(url);
+      const gameDb = response.data.filter((game) =>
+        game.id.toString().includes("-")
+      );
+      // console.log({ gameDb });
+      dispatch({
+        type: GET_GAME_CREATED,
+        payload: gameDb,
+      });
+    } catch (error) {
+      alert("No games created");
+    }
+  };
+};
+
+export const filterByApi = () => {
+  const url = "http://localhost:3001/videogames";
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(url);
+      const gameDb = response.data.filter(
+        (game) => !game.id.toString().includes("-")
+      );
+      // console.log({ gameDb });
+      dispatch({
+        type: GET_GAME_API,
+        payload: gameDb,
+      });
+    } catch (error) {
+      alert("Something went wrong");
+    }
+  };
+};
+
+export const getGameById = (id) => {
+  const url = `http://localhost:3001/videogames/${id}`;
+  return function (dispatch) {
+    axios.get(url).then((json) => {
+      console.log(json.data);
+      dispatch({
+        type: GET_GAME_BY_ID,
+        payload: json.data,
+      });
+    });
   };
 };

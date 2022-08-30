@@ -13,7 +13,7 @@ const Cards = ({ games }) => {
           id={g.id}
           name={g.name}
           image={g.image}
-          genres={g.genres.map((d) => d)}
+          genres={g.genres.map((d) => (d.name ? d.name : d))}
         />
       ))}
     </div>

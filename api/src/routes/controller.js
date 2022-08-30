@@ -106,7 +106,18 @@ function getVideogameByName(game) {
 
 const getGameById = async (id) => {
   if (id.length > 10) {
-    const game = await Videogame.findByPk(id);
+    const game = await Videogame.findAll({
+      where: {
+        id,
+      },
+      include: {
+        model: Genre,
+        attribute: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    });
     return game;
   } else {
     const url = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
@@ -119,7 +130,10 @@ const getGameById = async (id) => {
         genres: response.data.genres.map((d) => d.name),
         released: response.data.released,
         rating: response.data.rating,
-        platforms: response.data.platforms.map((d) => d.platform.name),
+        platforms: response.data.platforms
+          .map((d) => d.platform.name)
+          .join(", "),
+        description: response.data.description_raw,
       };
       // return response.data;
       return game;

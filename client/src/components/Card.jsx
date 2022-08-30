@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import s from "./style/Card.module.css";
 
 const Card = ({ key, id, name, image, genres }) => {
@@ -6,9 +7,9 @@ const Card = ({ key, id, name, image, genres }) => {
   return (
     <div className={s.card}>
       {/* <p>{key}</p> */}
-      <div className={s.image}>
+      <Link to={`/game/${id}`} className={s.image}>
         <img src={image} alt={name} />
-      </div>
+      </Link>
       <div>
         <h4>{name}</h4>
       </div>
