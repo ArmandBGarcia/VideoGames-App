@@ -142,12 +142,15 @@ export const filterByApi = () => {
 export const getGameById = (id) => {
   const url = `http://localhost:3001/videogames/${id}`;
   return function (dispatch) {
-    axios.get(url).then((json) => {
-      console.log(json.data);
-      dispatch({
-        type: GET_GAME_BY_ID,
-        payload: json.data,
-      });
-    });
+    axios
+      .get(url)
+      .then((json) => {
+        console.log(json.data);
+        dispatch({
+          type: GET_GAME_BY_ID,
+          payload: json.data,
+        });
+      })
+      .catch((e) => alert("Something went wrong"));
   };
 };

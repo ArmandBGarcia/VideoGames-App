@@ -5,7 +5,7 @@ import { getGameById } from "../redux/actions";
 import s from "./styles/Game.module.css";
 
 const Game = () => {
-  const state = useSelector((state) => state.gameDetail);
+  const game = useSelector((state) => state.gameDetail);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -13,45 +13,100 @@ const Game = () => {
     dispatch(getGameById(id));
   }, [dispatch, id]);
 
-  console.log({ state });
+  console.log({ game });
 
-  return (
+  return !game.length ? (
     <div className={s.container}>
-      <Link to="/home">
-        <button className={s.btn}>
-          <ion-icon name="arrow-undo"></ion-icon>
-        </button>
-      </Link>
-      {state.map((data) => (
-        <div className={s.containerCard}>
-          <div className={s.card}>
+      <div className={s.title}>
+        <Link to="/home">
+          <button className={s.btn}>
+            <ion-icon name="arrow-undo"></ion-icon>
+          </button>
+        </Link>
+        <h4 className={s.titleName}>{game.name}</h4>
+      </div>
+
+      <div className={s.containerCard}>
+        <div className={s.card}>
+          <div>
+            <img src={game.image} alt={game.name} className={s.image} />
+          </div>
+          <div className={s.info}>
             <div>
-              <img src={data.image} alt={data.name} className={s.image} />
+              <p className={s.nameColor}>Relased date: </p>
+              <p className={s.date}>{game.released}</p>
             </div>
-            <div className={s.info}>
-              <h4 className={s.name}>{data.name}</h4>
-              <div className={s.infoContainres}>
-                <p className={s.nameColor}>Relased date: </p>
-                <p>{data.released}</p>
-              </div>
-              <div className={s.infoContainres}>
-                <p className={s.nameColor}>Rating: </p>
-                <p>{data.rating}</p>
-              </div>
-              <div className={s.infoContainres}>
-                <p className={s.nameColor}>Platforms: </p>
-                <p>{data.platforms}</p>
-              </div>
+            <div className={s.infoContainres}>
+              <p className={s.nameColor}>Rating: </p>
+              <p>{game.rating}</p>
             </div>
-            <div className={s.genres}>
-              <h4 className={s.name}>Genres</h4>
-              {data.genres?.map((g) => (g.name ? <p>{g.name}</p> : <p>{g}</p>))}
+            <div>
+              <p className={s.nameColor}>Platforms: </p>
+              <p className={s.platforms}>{game.platforms}</p>
             </div>
           </div>
-          <div className={s.description}>
-            <div className={s.infoContainres}>
-              <p className={s.nameColor}>Description: </p>
-              <p>{data.description}</p>
+          <div className={s.genres}>
+            <h4 className={s.name}>Genres</h4>
+            {game.genres?.map((g) => (g.name ? <p>{g.name}</p> : <p>{g}</p>))}
+          </div>
+        </div>
+        <div className={s.description}>
+          <div className={s.infoContainres}>
+            <p>
+              <span className={s.nameColor}>Description: </span>
+              {game.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className={s.container}>
+      {game.map((game) => (
+        <div>
+          <div className={s.title}>
+            <Link to="/home">
+              <button className={s.btn}>
+                <ion-icon name="arrow-undo"></ion-icon>
+              </button>
+            </Link>
+
+            <h4 className={s.titleName}>{game.name}</h4>
+          </div>
+
+          <div className={s.containerCard}>
+            <div className={s.card}>
+              <div>
+                <img src={game.image} alt={game.name} className={s.image} />
+              </div>
+              <div className={s.info}>
+                <div className={s.infoContainres}>
+                  <p className={s.nameColor}>Relased date: </p>
+                  <p className={s.date}>{game.released}</p>
+                </div>
+                <div className={s.infoContainres}>
+                  <p className={s.nameColor}>Rating: </p>
+                  <p>{game.rating}</p>
+                </div>
+                <div>
+                  <p className={s.nameColor}>Platforms: </p>
+                  <p className={s.platforms}>{game.platforms}</p>
+                </div>
+              </div>
+              <div className={s.genres}>
+                <h4 className={s.name}>Genres</h4>
+                {game.genres?.map((g) =>
+                  g.name ? <p>{g.name}</p> : <p>{g}</p>
+                )}
+              </div>
+            </div>
+            <div className={s.description}>
+              <div className={s.infoContainres}>
+                <p>
+                  <span className={s.nameColor}>Description: </span>
+                  {game.description}
+                </p>
+              </div>
             </div>
           </div>
         </div>

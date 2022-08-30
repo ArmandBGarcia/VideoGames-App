@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   videogames: [],
-  gameDetail: {},
+  gameDetail: [],
 };
 
 const rootReducer = (state = initialState, action) => {
