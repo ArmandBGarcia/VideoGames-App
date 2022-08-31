@@ -6,3 +6,25 @@
   position: absolute;
   left: 35px;
 }
+
+.containerLink {
+  position: absolute;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.title {
+  color: #5c7cfa;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.title:visited {
+  color: #5c7cfa;
+}
+
+.title:hover {
+  font-size: 25px;
+}

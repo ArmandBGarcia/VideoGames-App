@@ -10,6 +10,9 @@
   font-size: 50px;
   margin-bottom: 10px;
   margin-left: 0px;
+  position: absolute;
+  left: 150px;
+  top: 55px;
 }
 
 .btn:hover {
@@ -22,8 +25,7 @@
   width: 1000px;
   margin: 0 auto;
   margin-top: 50px;
-  gap: 220px;
-  align-items: center;
+  justify-content: center;
 }
 
 .titleName {
@@ -49,7 +51,7 @@
 
 .image {
   height: 280px;
-  width: auto;
+  width: 500px;
   border-top-left-radius: 13px;
 }
 

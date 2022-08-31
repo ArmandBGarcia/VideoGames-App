@@ -3,6 +3,7 @@ const axios = require("axios");
 const { Videogame, Genre } = require("../db");
 const API_KEY = process.env.API_KEY;
 let containerMaster = [];
+let arrayGenres = [];
 
 const getVideogamesApi = async () => {
   if (!containerMaster.length) {
@@ -96,7 +97,7 @@ function getVideogameByName(game) {
         };
       });
       // easy to read this line
-      console.log(games.length);
+      // console.log(games.length);
       return games.length ? games : "the game was not found";
     })
     .catch((error) => console.log(error));
@@ -144,26 +145,35 @@ const getGameById = async (id) => {
 };
 
 function getGenres() {
-  const url = `https://api.rawg.io/api/genres?key=${API_KEY}`;
-  const result = axios
-    .get(url)
-    .then((resp) => {
-      const genres = resp.data.results.map((data) => data.name.toLowerCase());
-      // console.log(genres);
-      return genres;
-    })
-    .then((genres) => {
-      genres.map((data) => {
-        Genre.findOrCreate({
-          where: {
-            name: data,
-          },
+  if (!arrayGenres.length) {
+    const url = `https://api.rawg.io/api/genres?key=${API_KEY}`;
+    const result = axios
+      .get(url)
+      .then((resp) => {
+        const genres = resp.data.results.map((data) => data.name.toLowerCase());
+        // console.log(genres);
+        return genres;
+      })
+      .then((resp) => {
+        resp.map((data) => {
+          Genre.findOrCreate({
+            where: {
+              name: data,
+            },
+          });
         });
-      });
-      return "data created succesfuly";
-    })
-    .catch((error) => console.log(error));
-  return result;
+        return Genre.findAll().then((data) => {
+          arrayGenres = [...data];
+          return arrayGenres;
+        });
+      })
+      .catch((error) => console.log(error));
+    // console.log("trido de la API");
+    return result;
+  } else {
+    // console.log("traido de la  DB");
+    return arrayGenres;
+  }
 }
 
 const createGame = async (obj) => {

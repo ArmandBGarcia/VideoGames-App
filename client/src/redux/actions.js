@@ -6,6 +6,7 @@ export const SORT_BY_NAME = "SORT_BY_NAME";
 export const GET_GAME_CREATED = "GET_GAME_CREATED";
 export const GET_GAME_API = "GET_GAME_API";
 export const GET_GAME_BY_ID = "GET_GAME_BY_ID";
+export const GET_GENRES = "GET_GENRES";
 
 export const getVideogames = () => {
   const url = "http://localhost:3001/videogames";
@@ -145,12 +146,28 @@ export const getGameById = (id) => {
     axios
       .get(url)
       .then((json) => {
-        console.log(json.data);
+        // console.log(json.data);
         dispatch({
           type: GET_GAME_BY_ID,
           payload: json.data,
         });
       })
       .catch((e) => alert("Something went wrong"));
+  };
+};
+
+export const getGenres = () => {
+  const url = "http://localhost:3001/genres";
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(url);
+      // console.log(response.data);
+      dispatch({
+        type: GET_GENRES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert("The data couldn't been processed");
+    }
   };
 };

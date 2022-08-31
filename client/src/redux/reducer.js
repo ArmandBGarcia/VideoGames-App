@@ -5,12 +5,14 @@ import {
   GET_GAME_API,
   GET_GAME_BY_ID,
   GET_GAME_CREATED,
+  GET_GENRES,
   SORT_BY_NAME,
 } from "./actions";
 
 const initialState = {
   videogames: [],
   gameDetail: [],
+  genres: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -50,6 +52,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         gameDetail: action.payload,
+      };
+    case GET_GENRES:
+      return {
+        ...state,
+        genres: action.payload,
       };
 
     default:

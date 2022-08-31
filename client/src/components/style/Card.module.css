@@ -38,12 +38,21 @@ body {
   gap: 15px;
 }
 
-.image img {
+.link img {
   height: 160px;
   width: 310px;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   margin-top: 5px;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.link:visited {
+  color: #fff;
 }
 
 /* .image:hover {
