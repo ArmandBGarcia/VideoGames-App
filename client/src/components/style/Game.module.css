@@ -22,7 +22,7 @@
 .title {
   display: flex;
   /* border: solid red 5px; */
-  width: 1000px;
+  width: 800px;
   margin: 0 auto;
   margin-top: 50px;
   justify-content: center;
@@ -30,7 +30,7 @@
 
 .titleName {
   color: #fff;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 500;
 }
 
