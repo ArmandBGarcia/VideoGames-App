@@ -180,6 +180,7 @@ const createGame = async (obj) => {
   const { genres, name, description, platforms } = obj;
   if (!name || !description || !platforms || !genres.length)
     throw "Missing data required to crate a new game";
+
   // I map the array of genres and i search in the DB each one of the names and I save the result in a variable
   let genresDb = genres.map((genre) => {
     genre = genre.toLowerCase();

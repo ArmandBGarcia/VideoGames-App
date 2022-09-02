@@ -26,7 +26,7 @@ const validate = (game) => {
   if (!game.released) {
     error.released = "released is required!";
   } else if (regex.date.test(game.released)) {
-    error.released = "date invalid!";
+    error.released = "invalid date!";
   }
 
   if (!game.name) {
@@ -41,10 +41,15 @@ const validate = (game) => {
     error.description = "Description is required";
   } else if (!regex.onlyLetters.test(game.description)) {
     error.description = "invalid character";
-  } else if (game.description.length < 20 || game.description.length > 100) {
+  } else if (game.description.length < 20 || game.description.length > 150) {
     error.description =
-      "the length of the text must be between 10 and 30 words";
+      "the length of the text must be between 20 and 150 words";
   }
+
+  if (!game.platforms) {
+    error.platforms = "is required at least one platform";
+  }
+
   return error;
 };
 
@@ -96,144 +101,120 @@ const Form = () => {
 
   return (
     <div className={s.container}>
-      <h2 className={s.title}>Create A Game!!</h2>
-      <form>
-        <fieldset>
-          <legend>Please type the videogame data</legend>
-          <div className={s.fieldsetContainer}>
-            <div>
-              <div className={s.name}>
-                <label htmlFor="name">Name: </label>
-                <input
-                  type="text"
-                  placeholder="max 20 charcaters"
-                  required
-                  name="name"
-                  value={form.name}
-                  onChange={(e) => handleChange(e)}
-                />
-                {error.name ? (
-                  <span style={{ color: "red" }}>{error.name}</span>
-                ) : null}
-              </div>
-              <div className={s.date}>
-                <label htmlFor="released">Released Date: </label>
-                <input
-                  required
-                  type="date"
-                  name="released"
-                  value={form.released}
-                  onChange={(e) => handleChange(e)}
-                />
-                {error.released ? (
-                  <span style={{ color: "red" }}>{error.released}</span>
-                ) : null}
-              </div>
-              <div className={s.rating}>
-                <label htmlFor="rating">Rating: </label>
-                <input
-                  required
-                  onChange={(e) => handleChange(e)}
-                  type="text"
-                  name="rating"
-                  value={form.rating}
-                  placeholder="A number between 0 - 10"
-                />
-                {error.rating ? (
-                  <span style={{ color: "red" }}>{error.rating}</span>
-                ) : null}
-              </div>
-              <div className={s.description}>
-                <label htmlFor="description">Description: </label>
-                <textarea
-                  className={s.textarea}
-                  required
-                  id="description"
-                  name="description"
-                  value={form.description}
-                  onChange={(e) => handleChange(e)}
-                ></textarea>
-                {error.description ? (
-                  <span style={{ color: "red" }}>{error.description}</span>
-                ) : null}
-              </div>
-              {/* <div className={s.platforms}>
-            <label> Platforms: </label>
+      <div className={s.containerInfo}>
+        <form>
+          <fieldset>
+            <legend>please type the new game info</legend>
+            <br />
+            <label htmlFor="name">Name: </label>
+            <input
+              type="text"
+              name="name"
+              value={form.name}
+              placeholder="max 20 characters"
+              onChange={(e) => handleChange(e)}
+              required
+            />
+            <br />
+            {error.name ? <span className={s.error}>{error.name}</span> : null}
+            <br />
+            <label htmlFor="released">Released date: </label>
+            <input
+              type="date"
+              name="released"
+              value={form.released}
+              onChange={(e) => handleChange(e)}
+              required
+            />
+            <br />
+            {error.released ? (
+              <span className={s.error}>{error.released}</span>
+            ) : null}
+            <br />
+            <label htmlFor="reating">Rating: </label>
+            <input
+              type="text"
+              name="rating"
+              value={form.rating}
+              placeholder="a number between 1 or 10"
+              onChange={(e) => handleChange(e)}
+              required
+            />
+            <br />
+            {error.rating ? (
+              <span className={s.error}>{error.rating}</span>
+            ) : null}
+            <br />
+            <label htmlFor="description">Description: </label>
+            <br />
+            <textarea
+              onChange={(e) => handleChange(e)}
+              name="description"
+              value={form.description}
+              placeholder="type a description about the game..."
+              required
+            ></textarea>
+            <br />
+            {error.description ? (
+              <span className={s.error}>{error.description}</span>
+            ) : null}
+            <br />
+            <label htmlFor="platforms">Platforms: </label>
             <select
               name="platforms"
-              id="1"
-              required
               value={form.platforms}
+              required
               onChange={(e) => handleChange(e)}
             >
-              <option value="" selected>
-                Choose the platforms
-              </option>
               {platforms.map((data) => (
                 <option value={data}>{data}</option>
               ))}
             </select>
-          </div> */}
+            <br />
+            {error.platforms ? (
+              <span className={s.error}>{error.platforms}</span>
+            ) : null}
+            <br />
+            <label>
+              <input
+                type="checkbox"
+                value="PlayStation 5"
+                name="platforms"
+                onChange={(e) => handleChange(e)}
+              />
+              PlayStation 5
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="Xbox"
+                name="platforms"
+                onChange={(e) => handleChange(e)}
+              />
+              Xbox
+            </label>
 
-              {/* {platforms.map((data) => (
-              <button>
-                <input
-                  type="checkbox"
-                  value={form.platforms}
-                  name="platforms"
-                  onChange={(e) => handleChange(e)}
-                />
-                {data}
-              </button>
-            ))} */}
-
-              <div>
-                <label htmlFor="genres">Genres: </label>
-                <select name="genres" id="2" required>
-                  <option value="" selected>
-                    Select a genre
-                  </option>
-                  {genres.map((data) => (
-                    <option value={data.name}>{data.name}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div>
-              {platforms.map((data) => (
-                <button
-                  value={form.platforms}
-                  name="platforms"
-                  onChange={(e) => handleChange(e)}
-                >
-                  {data}
-                </button>
-              ))}
-            </div>
-            <div>
-              {genres.map((data) => (
-                <button value={data.name}>{data.name}</button>
-              ))}
-            </div>
-          </div>
-        </fieldset>
-        <div>
-          <button
-            className={s.btn}
-            onClick={handleSubmit}
-            disabled={
-              error.rating ||
-              error.name ||
-              error.description ||
-              error.genres ||
-              error.platforms ||
-              error.released
-            }
-          >
-            <ion-icon name="game-controller"></ion-icon>
-          </button>
-        </div>
-      </form>
+            <button
+              onClick={handleSubmit}
+              className={
+                error.name ||
+                error.description ||
+                error.released ||
+                error.platforms ||
+                error.rating ||
+                error.genres
+                  ? s.btnError
+                  : s.btn
+              }
+            >
+              <ion-icon name="game-controller"></ion-icon>
+            </button>
+          </fieldset>
+        </form>
+      </div>
+      <div className={s.containerCard}>
+        <h4>container card</h4>
+      </div>
     </div>
   );
 };
