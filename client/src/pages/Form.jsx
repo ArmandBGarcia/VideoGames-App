@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import NewGame from "../components/NewGame.jsx";
 import platforms from "../helpers/platforms.js";
 import { createGame, getGenres } from "../redux/actions.js";
@@ -35,8 +36,8 @@ const validate = (game) => {
     error.name = "name is required!";
   } else if (!regex.onlyLetters.test(game.name)) {
     error.name = "invalid name!";
-  } else if (game.name.length > 20) {
-    error.name = "the name must have max 20 characters";
+  } else if (game.name.length > 20 || game.name.length < 5) {
+    error.name = "name lenght must be between 5 and 20 characters";
   }
 
   if (!game.description) {
@@ -71,7 +72,7 @@ const validate = (game) => {
 
 const Form = () => {
   const generos = useSelector((state) => state.genres);
-  const game = useSelector((state) => state.newGame);
+
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     released: "",
@@ -101,7 +102,7 @@ const Form = () => {
       ...form,
       [e.target.name]: e.target.value,
     });
-    console.log({ form });
+    // console.log({ form });
   };
 
   const handlePlatform = (e) => {
@@ -118,7 +119,7 @@ const Form = () => {
         ? [...form.strs, e.target.value]
         : form.strs.filter((p) => p !== e.target.value),
     });
-    console.log({ form });
+    // console.log({ form });
   };
 
   const handleGenres = (e) => {
@@ -168,147 +169,159 @@ const Form = () => {
   };
 
   return (
-    <div className={s.container}>
-      <div className={s.containerInfo}>
-        <form>
-          <fieldset>
-            <legend>please type the new game info</legend>
-            <br />
-            <label htmlFor="name">Name: </label>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              placeholder="max 20 characters"
-              onChange={(e) => handleChange(e)}
-              required
-            />
-            <br />
-            {error.name ? <span className={s.error}>{error.name}</span> : null}
-            <br />
-            <label htmlFor="image">Image: </label>
-            <input
-              type="text"
-              name="image"
-              value={form.image}
-              placeholder="url image..."
-              onChange={(e) => handleChange(e)}
-            />
-            <br />
-            {error.image ? (
-              <span className={s.error}>{error.image}</span>
-            ) : null}
-            <br />
-            <label htmlFor="released">Released date: </label>
-            <input
-              type="date"
-              name="released"
-              value={form.released}
-              onChange={(e) => handleChange(e)}
-              required
-            />
-            <br />
-            {error.released ? (
-              <span className={s.error}>{error.released}</span>
-            ) : null}
-            <br />
-            <label htmlFor="reating">Rating: </label>
-            <input
-              type="text"
-              name="rating"
-              value={form.rating}
-              placeholder="a number between 1 or 10"
-              onChange={(e) => handleChange(e)}
-              required
-            />
-            <br />
-            {error.rating ? (
-              <span className={s.error}>{error.rating}</span>
-            ) : null}
-            <br />
-            <label htmlFor="description">Description: </label>
-            <br />
-            <textarea
-              onChange={(e) => handleChange(e)}
-              name="description"
-              value={form.description}
-              placeholder="type a description about the game..."
-              required
-            ></textarea>
-            <br />
-            {error.description ? (
-              <span className={s.error}>{error.description}</span>
-            ) : null}
-            <br />
-            <label htmlFor="platforms">Platforms: </label>
-            <select
-              name="platforms"
-              value={form.strs}
-              required
-              onChange={(e) => handlePlatform(e)}
-            >
-              <option value="" selected>
-                platforms...
-              </option>
-              {platforms?.map((data) => (
-                <option value={data}>{data}</option>
-              ))}
-            </select>
-            <br />
-            {error.strs ? <span className={s.error}>{error.strs}</span> : null}
-            <br />
-            <label>Genres: </label>
-            <select
-              name="genres"
-              value={form.genres}
-              required
-              onChange={(e) => handleGenres(e)}
-            >
-              <option value="" selected>
-                genres...
-              </option>
-              {generos?.map((data) => (
-                <option value={data.name}>{data.name}</option>
-              ))}
-            </select>
-            <br />
-            {error.genres ? (
-              <span className={s.error}>{error.genres}</span>
-            ) : null}
-            <button
-              onClick={handleSubmit}
-              className={
-                error.name ||
-                error.description ||
-                error.released ||
-                error.platforms ||
-                error.rating ||
-                error.genres
-                  ? s.btnError
-                  : s.btn
-              }
-              disabled={
-                error.name ||
-                error.description ||
-                error.released ||
-                error.platforms ||
-                error.rating ||
-                error.genres
-                  ? true
-                  : false
-              }
-            >
-              <ion-icon name="game-controller"></ion-icon>
-            </button>
-          </fieldset>
-        </form>
-      </div>
-      <div>
-        <NewGame
-          form={form}
-          deleteGenre={deleteGenre}
-          deletePlatform={deletePlatform}
-        />
+    <div>
+      <Link to="/home">
+        <button className={s.btn1}>
+          <ion-icon name="arrow-undo"></ion-icon>
+        </button>
+      </Link>
+      <div className={s.container}>
+        <h1 className={s.title}>New Game!!</h1>
+        <div className={s.containerInfo}>
+          <form>
+            <fieldset>
+              <legend>please type the new game info</legend>
+              <br />
+              <label htmlFor="name">Name: </label>
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                placeholder="max 20 characters"
+                onChange={(e) => handleChange(e)}
+                required
+              />
+              <br />
+              {error.name ? (
+                <span className={s.error}>{error.name}</span>
+              ) : null}
+              <br />
+              <label htmlFor="image">Image: </label>
+              <input
+                type="text"
+                name="image"
+                value={form.image}
+                placeholder="url image..."
+                onChange={(e) => handleChange(e)}
+              />
+              <br />
+              {error.image ? (
+                <span className={s.error}>{error.image}</span>
+              ) : null}
+              <br />
+              <label htmlFor="released">Released date: </label>
+              <input
+                type="date"
+                name="released"
+                value={form.released}
+                onChange={(e) => handleChange(e)}
+                required
+              />
+              <br />
+              {error.released ? (
+                <span className={s.error}>{error.released}</span>
+              ) : null}
+              <br />
+              <label htmlFor="reating">Rating: </label>
+              <input
+                type="text"
+                name="rating"
+                value={form.rating}
+                placeholder="a number between 1 or 10"
+                onChange={(e) => handleChange(e)}
+                required
+              />
+              <br />
+              {error.rating ? (
+                <span className={s.error}>{error.rating}</span>
+              ) : null}
+              <br />
+              <label htmlFor="description">Description: </label>
+              <br />
+              <textarea
+                onChange={(e) => handleChange(e)}
+                name="description"
+                value={form.description}
+                placeholder="type a description about the game..."
+                required
+              ></textarea>
+              <br />
+              {error.description ? (
+                <span className={s.error}>{error.description}</span>
+              ) : null}
+              <br />
+              <label htmlFor="platforms">Platforms: </label>
+              <select
+                name="platforms"
+                value={form.strs}
+                required
+                onChange={(e) => handlePlatform(e)}
+              >
+                <option value="" selected>
+                  platforms...
+                </option>
+                {platforms?.map((data) => (
+                  <option value={data}>{data}</option>
+                ))}
+              </select>
+              <br />
+              {error.strs ? (
+                <span className={s.error}>{error.strs}</span>
+              ) : null}
+              <br />
+              <label>Genres: </label>
+              <select
+                name="genres"
+                value={form.genres}
+                required
+                onChange={(e) => handleGenres(e)}
+              >
+                <option value="" selected>
+                  genres...
+                </option>
+                {generos?.map((data) => (
+                  <option value={data.name}>{data.name}</option>
+                ))}
+              </select>
+              <br />
+              {error.genres ? (
+                <span className={s.error}>{error.genres}</span>
+              ) : null}
+              <button
+                onClick={handleSubmit}
+                className={
+                  error.name ||
+                  error.description ||
+                  error.released ||
+                  error.platforms ||
+                  error.rating ||
+                  error.genres
+                    ? s.btnError
+                    : s.btn
+                }
+                disabled={
+                  error.name ||
+                  error.description ||
+                  error.released ||
+                  error.platforms ||
+                  error.rating ||
+                  error.genres
+                    ? true
+                    : false
+                }
+              >
+                <ion-icon name="game-controller"></ion-icon>
+              </button>
+            </fieldset>
+          </form>
+        </div>
+        <div>
+          <NewGame
+            form={form}
+            deleteGenre={deleteGenre}
+            deletePlatform={deletePlatform}
+          />
+        </div>
       </div>
     </div>
   );

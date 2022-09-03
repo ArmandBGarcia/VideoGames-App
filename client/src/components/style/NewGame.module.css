@@ -1,6 +1,7 @@
 .container {
   font-family: sans-serif;
   font-size: 20px;
+  margin-top: 30px;
 }
 
 .card {
@@ -18,7 +19,9 @@
   position: absolute;
   text-align: center;
   text-transform: capitalize;
-  top: 30px;
+  top: 75px;
+  font-size: 30px;
+  font-weight: 600;
   left: 540px;
 }
 
@@ -33,9 +36,26 @@
 }
 
 .contBtn {
+  text-transform: capitalize;
+  background-color: #3b5bdb;
+  font-size: 17px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   column-gap: 5px;
-  /* background-color: #5c7cfa; */
+  margin-bottom: 5px;
+  height: 20px;
+  width: 130px;
+  border-radius: 5px;
+}
+
+.btn {
+  width: 20px;
+  text-align: center;
+  background-color: transparent;
+  color: #fff;
+  border: 0;
+  font-size: 15px;
 }
 
 .btn:hover {

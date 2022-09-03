@@ -8,6 +8,18 @@ textarea {
   resize: none;
 }
 
+.btn1 {
+  background-color: transparent;
+  border: 0;
+  color: #5c7cfa;
+  font-size: 50px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  position: absolute;
+  top: 15px;
+  left: 60px;
+}
+
 .container {
   width: 1100px;
   /* border: solid 5px red; */
@@ -18,10 +30,18 @@ textarea {
   gap: 150px;
 }
 
+.title {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+}
+
 .container fieldset {
+  margin-top: 20px;
+  text-transform: capitalize;
   width: 300px;
   text-align: center;
-  height: 550px;
+  height: 510px;
   border: #5c7cfa solid;
   border-radius: 12px;
 }
@@ -37,7 +57,7 @@ textarea {
   font-size: 50px;
 
   position: absolute;
-  top: 570px;
+  top: 540px;
   left: 255px;
 }
 
@@ -47,7 +67,7 @@ textarea {
 
 .btnError {
   background-color: transparent;
-  color: red;
+  color: #c92a2a;
   border: 0;
   font-size: 50px;
 
@@ -62,7 +82,7 @@ textarea {
 }
 
 .error {
-  color: red;
+  color: #c92a2a;
   font-size: 13px;
   font-weight: 500;
 }

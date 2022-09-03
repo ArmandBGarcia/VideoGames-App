@@ -51,7 +51,7 @@ server.get("/:id", (req, res) => {
 });
 
 server.post("/", async (req, res) => {
-  const { released, name, rating, description, strs, genres } = req.body;
+  const { released, name, image, rating, description, strs, genres } = req.body;
 
   console.log(req.body);
   try {
@@ -60,6 +60,7 @@ server.post("/", async (req, res) => {
     const newgame = await createGame({
       released,
       name,
+      image,
       rating,
       description,
       platforms,

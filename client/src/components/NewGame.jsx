@@ -24,7 +24,7 @@ const NewGame = ({ form, deleteGenre, deletePlatform }) => {
               <div key={d} className={s.contBtn}>
                 <span>{d}</span>
                 <button className={s.btn} onClick={() => deletePlatform(d)}>
-                  x
+                  ❌
                 </button>
               </div>
             ))}
@@ -35,7 +35,7 @@ const NewGame = ({ form, deleteGenre, deletePlatform }) => {
               <div key={d} className={s.contBtn}>
                 <span>{d}</span>
                 <button className={s.btn} onClick={() => deleteGenre(d)}>
-                  x
+                  ❌
                 </button>
               </div>
             ))}

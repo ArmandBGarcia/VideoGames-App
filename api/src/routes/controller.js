@@ -162,9 +162,10 @@ function getGenres() {
 }
 
 const createGame = async (obj) => {
-  const { genres, name, description, platforms, released, rating } = obj;
+  const { genres, name, image, description, platforms, released, rating } = obj;
   if (
     !name ||
+    !image ||
     !description ||
     !rating ||
     !released ||
