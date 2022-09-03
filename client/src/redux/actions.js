@@ -7,6 +7,7 @@ export const GET_GAME_CREATED = "GET_GAME_CREATED";
 export const GET_GAME_API = "GET_GAME_API";
 export const GET_GAME_BY_ID = "GET_GAME_BY_ID";
 export const GET_GENRES = "GET_GENRES";
+export const CREATE_GAME = "CREATE_GAME";
 
 export const getVideogames = () => {
   const url = "http://localhost:3001/videogames";
@@ -169,5 +170,22 @@ export const getGenres = () => {
     } catch (error) {
       alert("The data couldn't been processed");
     }
+  };
+};
+
+export const createGame = (obj) => {
+  const url = "http://localhost:3001/videogames";
+  return function (dispatch) {
+    axios
+      .post(url, obj)
+      .then((json) => {
+        dispatch({
+          type: CREATE_GAME,
+          payload: json.data,
+        });
+      })
+      .catch((error) => {
+        return alert("Missing data required to crate a new game");
+      });
   };
 };

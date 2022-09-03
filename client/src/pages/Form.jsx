@@ -2,8 +2,9 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import NewGame from "../components/NewGame.jsx";
 import platforms from "../helpers/platforms.js";
-import { getGenres } from "../redux/actions.js";
+import { createGame, getGenres } from "../redux/actions.js";
 import s from "./styles/Form.module.css";
 
 const validate = (game) => {
@@ -12,6 +13,7 @@ const validate = (game) => {
     onlyNumbers: /^([0-9])*$/,
     float: /^[0-9]+([,.][0-9]+)?$/,
     onlyLetters: /^[a-zA-Z_ -]+$/,
+    urlImage: /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g,
     date: /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
   };
 
@@ -46,23 +48,39 @@ const validate = (game) => {
       "the length of the text must be between 20 and 150 words";
   }
 
-  if (!game.platforms) {
-    error.platforms = "is required at least one platform";
+  if (!game.strs) {
+    error.strs = "is required at least one platform";
+  } else if (game.strs.length > 5) {
+    error.strs = "maximun five platforms";
+  }
+
+  if (!game.image) {
+    error.image = "image required!";
+  } else if (!regex.urlImage.test(game.image)) {
+    error.image = "invalid url image";
+  }
+
+  if (game.genres.length === 0) {
+    error.genres = "is required at least one genre";
+  } else if (game.genres.length > 4) {
+    error.genres = "maximun five genres per game";
   }
 
   return error;
 };
 
 const Form = () => {
-  const genres = useSelector((state) => state.genres);
+  const generos = useSelector((state) => state.genres);
+  const game = useSelector((state) => state.newGame);
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     released: "",
     name: "",
+    image: "",
     rating: "",
     description: "",
-    platforms: "",
-    Genres: [],
+    strs: [],
+    genres: [],
   });
 
   const [error, setError] = useState({});
@@ -86,16 +104,66 @@ const Form = () => {
     console.log({ form });
   };
 
+  const handlePlatform = (e) => {
+    e.preventDefault();
+    setError(
+      validate({
+        ...form,
+        [e.target.name]: [e.target.value],
+      })
+    );
+    setForm({
+      ...form,
+      strs: !form.strs.includes(e.target.value)
+        ? [...form.strs, e.target.value]
+        : form.strs.filter((p) => p !== e.target.value),
+    });
+    console.log({ form });
+  };
+
+  const handleGenres = (e) => {
+    e.preventDefault();
+    setError(
+      validate({
+        ...form,
+        [e.target.name]: [e.target.value],
+      })
+    );
+    setForm({
+      ...form,
+      genres: !form.genres.includes(e.target.value)
+        ? [...form.genres, e.target.value]
+        : form.genres.filter((g) => g !== e.target.value),
+    });
+  };
+
+  const deletePlatform = (e) => {
+    // e.preventDefault();
+    setForm({
+      ...form,
+      strs: form.strs.filter((c) => c !== e),
+    });
+  };
+
+  const deleteGenre = (e) => {
+    // e.preventDefault();
+    setForm({
+      ...form,
+      genres: form.genres.filter((c) => c !== e),
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Videogame created succesfully!!");
+    dispatch(createGame(form));
     setForm({
       released: "",
       name: "",
+      image: "",
       rating: "",
       description: "",
-      platforms: "",
-      Genres: [],
+      strs: [],
+      genres: [],
     });
   };
 
@@ -117,6 +185,19 @@ const Form = () => {
             />
             <br />
             {error.name ? <span className={s.error}>{error.name}</span> : null}
+            <br />
+            <label htmlFor="image">Image: </label>
+            <input
+              type="text"
+              name="image"
+              value={form.image}
+              placeholder="url image..."
+              onChange={(e) => handleChange(e)}
+            />
+            <br />
+            {error.image ? (
+              <span className={s.error}>{error.image}</span>
+            ) : null}
             <br />
             <label htmlFor="released">Released date: </label>
             <input
@@ -162,38 +243,38 @@ const Form = () => {
             <label htmlFor="platforms">Platforms: </label>
             <select
               name="platforms"
-              value={form.platforms}
+              value={form.strs}
               required
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handlePlatform(e)}
             >
-              {platforms.map((data) => (
+              <option value="" selected>
+                platforms...
+              </option>
+              {platforms?.map((data) => (
                 <option value={data}>{data}</option>
               ))}
             </select>
             <br />
-            {error.platforms ? (
-              <span className={s.error}>{error.platforms}</span>
-            ) : null}
+            {error.strs ? <span className={s.error}>{error.strs}</span> : null}
             <br />
-            <label>
-              <input
-                type="checkbox"
-                value="PlayStation 5"
-                name="platforms"
-                onChange={(e) => handleChange(e)}
-              />
-              PlayStation 5
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Xbox"
-                name="platforms"
-                onChange={(e) => handleChange(e)}
-              />
-              Xbox
-            </label>
-
+            <label>Genres: </label>
+            <select
+              name="genres"
+              value={form.genres}
+              required
+              onChange={(e) => handleGenres(e)}
+            >
+              <option value="" selected>
+                genres...
+              </option>
+              {generos?.map((data) => (
+                <option value={data.name}>{data.name}</option>
+              ))}
+            </select>
+            <br />
+            {error.genres ? (
+              <span className={s.error}>{error.genres}</span>
+            ) : null}
             <button
               onClick={handleSubmit}
               className={
@@ -206,14 +287,28 @@ const Form = () => {
                   ? s.btnError
                   : s.btn
               }
+              disabled={
+                error.name ||
+                error.description ||
+                error.released ||
+                error.platforms ||
+                error.rating ||
+                error.genres
+                  ? true
+                  : false
+              }
             >
               <ion-icon name="game-controller"></ion-icon>
             </button>
           </fieldset>
         </form>
       </div>
-      <div className={s.containerCard}>
-        <h4>container card</h4>
+      <div>
+        <NewGame
+          form={form}
+          deleteGenre={deleteGenre}
+          deletePlatform={deletePlatform}
+        />
       </div>
     </div>
   );

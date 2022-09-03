@@ -1,4 +1,5 @@
 import {
+  CREATE_GAME,
   FILTER_BY_GENRE,
   GET_GAMES,
   GET_GAMES_BY_NAME,
@@ -13,6 +14,7 @@ const initialState = {
   videogames: [],
   gameDetail: [],
   genres: [],
+  newGame: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -57,6 +59,15 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         genres: action.payload,
+      };
+    case CREATE_GAME:
+      // if (action.payload.error) {
+      //   alert(action.payload.error);
+      //   return state;
+      // }
+      return {
+        ...state,
+        newGame: action.payload,
       };
 
     default:

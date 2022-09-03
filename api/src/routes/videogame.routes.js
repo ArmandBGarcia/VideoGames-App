@@ -51,11 +51,23 @@ server.get("/:id", (req, res) => {
 });
 
 server.post("/", async (req, res) => {
+  const { released, name, rating, description, strs, genres } = req.body;
+
+  console.log(req.body);
   try {
-    const game = await createGame(req.body);
-    res.status(200).json(game);
-  } catch (error) {
-    res.status(400).json({ msg: "Something went wrong", error });
+    // console.log(released, name, rating, description, strs);
+    const platforms = strs.join(" ");
+    const newgame = await createGame({
+      released,
+      name,
+      rating,
+      description,
+      platforms,
+      genres,
+    });
+    return res.status(200).json(newgame);
+  } catch (e) {
+    return res.status(400).json({ error: e });
   }
 });
 

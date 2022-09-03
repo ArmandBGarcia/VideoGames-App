@@ -21,19 +21,13 @@ textarea {
 .container fieldset {
   width: 300px;
   text-align: center;
-  height: 500px;
+  height: 550px;
   border: #5c7cfa solid;
   border-radius: 12px;
 }
 
 .container legend {
   padding: 0 10px;
-}
-
-.containerCard {
-  border: solid #5c7cfa 3px;
-  border-radius: 15px;
-  height: 500px;
 }
 
 .btn {
@@ -43,7 +37,7 @@ textarea {
   font-size: 50px;
 
   position: absolute;
-  top: 520px;
+  top: 570px;
   left: 255px;
 }
 
@@ -58,7 +52,7 @@ textarea {
   font-size: 50px;
 
   position: absolute;
-  top: 520px;
+  top: 560px;
   left: 255px;
   cursor: not-allowed;
 }

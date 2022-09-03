@@ -61,21 +61,6 @@ const getVideogamesDb = async () => {
   return game.length ? game : game;
 };
 
-// function getAllGames() {
-//   const apiGames = getVideogamesApi()
-//     .then((resp) => {
-//       return resp;
-//     })
-//     .catch((error) => console.log(error));
-//   const dbGames = getVideogamesDb()
-//     .then((resp) => {
-//       return resp;
-//     })
-//     .catch((error) => console.log(error));
-//   const allGames = [...apiGames, dbGames];
-//   return allGames;
-// }
-
 const getAllGames = async () => {
   const apiGames = await getVideogamesApi();
   const dbGames = await getVideogamesDb();
@@ -177,9 +162,17 @@ function getGenres() {
 }
 
 const createGame = async (obj) => {
-  const { genres, name, description, platforms } = obj;
-  if (!name || !description || !platforms || !genres.length)
+  const { genres, name, description, platforms, released, rating } = obj;
+  if (
+    !name ||
+    !description ||
+    !rating ||
+    !released ||
+    !platforms ||
+    !genres.length
+  ) {
     throw "Missing data required to crate a new game";
+  }
 
   // I map the array of genres and i search in the DB each one of the names and I save the result in a variable
   let genresDb = genres.map((genre) => {
@@ -202,7 +195,7 @@ const createGame = async (obj) => {
 
   newGame.addGenre(idGenres);
 
-  return { msg: "Videogame created succesfully!!", newGame };
+  return "Videogame created succesfully!!";
 };
 
 module.exports = {
