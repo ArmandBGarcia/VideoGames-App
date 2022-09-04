@@ -22,8 +22,8 @@ const validate = (game) => {
     error.rating = "rating is required!";
   } else if (!regex.float.test(game.rating)) {
     error.rating = "only numbers please!";
-  } else if (game.rating < 1 || game.rating > 10) {
-    error.rating = "rating must be between 1 or 10!";
+  } else if (game.rating < 0.1 || game.rating > 5) {
+    error.rating = "rating must be between 0.1 or 5!";
   }
 
   if (!game.released) {
@@ -49,7 +49,7 @@ const validate = (game) => {
       "the length of the text must be between 20 and 150 words";
   }
 
-  if (!game.strs) {
+  if (game.strs.length === 0) {
     error.strs = "is required at least one platform";
   } else if (game.strs.length > 5) {
     error.strs = "maximun five platforms";
@@ -63,7 +63,7 @@ const validate = (game) => {
 
   if (game.genres.length === 0) {
     error.genres = "is required at least one genre";
-  } else if (game.genres.length > 4) {
+  } else if (game.genres.length > 5) {
     error.genres = "maximun five genres per game";
   }
 
@@ -102,7 +102,7 @@ const Form = () => {
       ...form,
       [e.target.name]: e.target.value,
     });
-    // console.log({ form });
+    console.log({ form });
   };
 
   const handlePlatform = (e) => {
@@ -119,7 +119,7 @@ const Form = () => {
         ? [...form.strs, e.target.value]
         : form.strs.filter((p) => p !== e.target.value),
     });
-    // console.log({ form });
+    console.log({ form });
   };
 
   const handleGenres = (e) => {
@@ -136,6 +136,7 @@ const Form = () => {
         ? [...form.genres, e.target.value]
         : form.genres.filter((g) => g !== e.target.value),
     });
+    console.log({ form });
   };
 
   const deletePlatform = (e) => {
@@ -188,7 +189,7 @@ const Form = () => {
                 name="name"
                 value={form.name}
                 placeholder="max 20 characters"
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
                 required
               />
               <br />
@@ -202,7 +203,8 @@ const Form = () => {
                 name="image"
                 value={form.image}
                 placeholder="url image..."
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
+                required
               />
               <br />
               {error.image ? (
@@ -214,7 +216,7 @@ const Form = () => {
                 type="date"
                 name="released"
                 value={form.released}
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
                 required
               />
               <br />
@@ -227,8 +229,8 @@ const Form = () => {
                 type="text"
                 name="rating"
                 value={form.rating}
-                placeholder="a number between 1 or 10"
-                onChange={(e) => handleChange(e)}
+                placeholder="a number between 0.1 or 5"
+                onChange={handleChange}
                 required
               />
               <br />
@@ -239,7 +241,7 @@ const Form = () => {
               <label htmlFor="description">Description: </label>
               <br />
               <textarea
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
                 name="description"
                 value={form.description}
                 placeholder="type a description about the game..."
@@ -255,10 +257,10 @@ const Form = () => {
                 name="platforms"
                 value={form.strs}
                 required
-                onChange={(e) => handlePlatform(e)}
+                onChange={handlePlatform}
               >
                 <option value="" selected>
-                  platforms...
+                  max 5 platforms...
                 </option>
                 {platforms?.map((data) => (
                   <option value={data}>{data}</option>
@@ -274,10 +276,10 @@ const Form = () => {
                 name="genres"
                 value={form.genres}
                 required
-                onChange={(e) => handleGenres(e)}
+                onChange={handleGenres}
               >
                 <option value="" selected>
-                  genres...
+                  max 5 genres...
                 </option>
                 {generos?.map((data) => (
                   <option value={data.name}>{data.name}</option>

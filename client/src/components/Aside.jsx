@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import FilterByGenres from "../filters/FilterByGenres";
 import SortApiOrDb from "../filters/SortApiOrDb";
 import SortByName from "../filters/SortByName";
+import SortByRating from "../filters/SortByRating";
 import s from "./style/Aside.module.css";
 const Aside = () => {
   return (
@@ -20,6 +21,8 @@ const Aside = () => {
         <FilterByGenres />
         <br />
         <SortByName />
+        <br />
+        <SortByRating />
         <br />
         <SortApiOrDb />
       </aside>

@@ -19,7 +19,8 @@ const getVideogamesApi = async () => {
         id: data.id,
         name: data.name,
         image: data.background_image,
-        genres: data.genres.map((g) => g.name),
+        rating: data.rating,
+        genres: data.genres.map((g) => g.name.toLowerCase()),
       };
     });
 
@@ -28,7 +29,8 @@ const getVideogamesApi = async () => {
         id: data.id,
         name: data.name,
         image: data.background_image,
-        genres: data.genres.map((g) => g.name),
+        rating: data.rating,
+        genres: data.genres.map((g) => g.name.toLowerCase()),
       };
     });
 
@@ -37,7 +39,8 @@ const getVideogamesApi = async () => {
         id: data.id,
         name: data.name,
         image: data.background_image,
-        genres: data.genres.map((g) => g.name),
+        rating: data.rating,
+        genres: data.genres.map((g) => g.name.toLowerCase()),
       };
     });
 
@@ -58,7 +61,18 @@ const getVideogamesDb = async () => {
       },
     },
   });
-  return game.length ? game : game;
+  // return game.length ? game : game;
+  const infoGame = game.map((data) => {
+    return {
+      id: data.id,
+      name: data.name,
+      image: data.image,
+      rating: data.rating,
+      genres: data.genres.map((g) => g.name),
+    };
+  });
+  // return game;
+  return infoGame;
 };
 
 const getAllGames = async () => {

@@ -8,6 +8,7 @@ import {
   GET_GAME_CREATED,
   GET_GENRES,
   SORT_BY_NAME,
+  SORT_BY_RATING,
 } from "./actions";
 
 const initialState = {
@@ -68,6 +69,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         newGame: action.payload,
+      };
+    case SORT_BY_RATING:
+      return {
+        ...state,
+        videogames: action.payload,
       };
 
     default:

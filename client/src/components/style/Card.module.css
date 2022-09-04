@@ -25,6 +25,15 @@ body {
   text-align: center;
   height: 300px;
   color: #fff;
+  position: relative;
+}
+
+.rating {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  color: #5c7cfa;
+  font-weight: 700;
 }
 
 .card:hover {

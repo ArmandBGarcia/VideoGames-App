@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <header className={s.container}>
       <nav className={s.navbar}>
-        <p>Videogames App</p>
+        <p className={s.title}>Videogames App</p>
         <SearchByName />
       </nav>
     </header>

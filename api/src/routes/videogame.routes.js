@@ -13,14 +13,14 @@ const server = express();
 //   res.json({ msg: "Everythig OK" });
 // });
 
-// server.get("/db", async (req, res) => {
-//   try {
-//     const game = await getVideogamesDb();
-//     res.status(200).json(game);
-//   } catch (error) {
-//     res.status(400).json({ msg: "Upss, something went wrong" });
-//   }
-// });
+server.get("/db", async (req, res) => {
+  try {
+    const game = await getVideogamesDb();
+    res.status(200).json(game);
+  } catch (error) {
+    res.status(400).json({ msg: "Upss, something went wrong" });
+  }
+});
 
 server.get("/", (req, res) => {
   const { name } = req.query;

@@ -8,6 +8,7 @@ export const GET_GAME_API = "GET_GAME_API";
 export const GET_GAME_BY_ID = "GET_GAME_BY_ID";
 export const GET_GENRES = "GET_GENRES";
 export const CREATE_GAME = "CREATE_GAME";
+export const SORT_BY_RATING = "SORT_BY_RATING";
 
 export const getVideogames = () => {
   const url = "http://localhost:3001/videogames";
@@ -46,7 +47,7 @@ export const filterByGenre = (genre) => {
       const response = await axios.get(url);
       console.log("response", response.data);
       const game = response.data.filter(
-        (d) => d.genres.filter((g) => g === genre).length
+        (d) => d.genres.filter((g) => g === genre.toLowerCase()).length
       );
       // console.log({ game });
       if (game.length) {
@@ -103,6 +104,30 @@ export const sortByName = (value) => {
   };
 };
 
+export const sortByRating = (value) => {
+  const url = "http://localhost:3001/videogames";
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(url);
+      const rating = response.data;
+      // console.log({ rating });
+      if (value === "asc") {
+        const sorted = rating.sort((a, b) => {
+          return a.rating - b.rating;
+        });
+        dispatch({ type: SORT_BY_RATING, payload: sorted });
+      } else if ((value = "desc")) {
+        const sorted = rating.sort((a, b) => {
+          return b.rating - a.rating;
+        });
+        dispatch({ type: SORT_BY_RATING, payload: sorted });
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+};
+
 export const filterByDb = () => {
   const url = "http://localhost:3001/videogames";
   return async (dispatch) => {
@@ -112,10 +137,14 @@ export const filterByDb = () => {
         game.id.toString().includes("-")
       );
       // console.log({ gameDb });
-      dispatch({
-        type: GET_GAME_CREATED,
-        payload: gameDb,
-      });
+      if (gameDb.length) {
+        dispatch({
+          type: GET_GAME_CREATED,
+          payload: gameDb,
+        });
+      } else {
+        return alert("No one game created");
+      }
     } catch (error) {
       alert("No games created");
     }
@@ -176,6 +205,7 @@ export const getGenres = () => {
 export const createGame = (obj) => {
   const url = "http://localhost:3001/videogames";
   return function (dispatch) {
+    console.log(obj.name);
     axios
       .post(url, obj)
       .then((json) => {
@@ -183,9 +213,10 @@ export const createGame = (obj) => {
           type: CREATE_GAME,
           payload: json.data,
         });
+        alert(json.data);
       })
       .catch((error) => {
-        return alert("Missing data required to crate a new game");
+        return alert("Please, send the information correctly");
       });
   };
 };

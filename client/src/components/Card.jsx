@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import s from "./style/Card.module.css";
 
-const Card = ({ key, id, name, image, genres }) => {
+const Card = ({ key, id, name, image, genres, rating }) => {
   // console.log({ key });
   return (
     <div className={s.card}>
@@ -16,6 +16,7 @@ const Card = ({ key, id, name, image, genres }) => {
             <p>{g}</p>
           ))}
         </div>
+        <p className={s.rating}>{rating}</p>
       </Link>
     </div>
   );

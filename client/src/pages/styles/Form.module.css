@@ -20,6 +20,10 @@ textarea {
   left: 60px;
 }
 
+.btn1:hover {
+  cursor: pointer;
+}
+
 .container {
   width: 1100px;
   /* border: solid 5px red; */
@@ -63,6 +67,7 @@ textarea {
 
 .btn:hover {
   cursor: pointer;
+  color: #fff;
 }
 
 .btnError {
