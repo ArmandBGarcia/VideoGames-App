@@ -1,3 +1,7 @@
+/* Primario rgb(32, 32, 32)*/
+/* Secundario #5c7cfa */
+/* Resalte #fd7e14 */
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +10,7 @@
 
 body {
   background-color: rgb(21, 21, 21);
+  /* background-color: #212529; */
   color: #fff;
 }
 
@@ -21,6 +26,7 @@ body {
 .card {
   /* border: solid 5px red; */
   background-color: rgb(32, 32, 32);
+
   border-radius: 15px;
   text-align: center;
   height: 300px;
@@ -28,11 +34,15 @@ body {
   position: relative;
 }
 
+.name {
+  text-transform: capitalize;
+}
+
 .rating {
   position: absolute;
   bottom: 15px;
   right: 15px;
-  color: #5c7cfa;
+  color: #fd7e14;
   font-weight: 700;
 }
 
@@ -42,17 +52,17 @@ body {
 }
 
 .genres {
+  text-transform: capitalize;
   display: flex;
   justify-content: center;
   gap: 15px;
 }
 
 .link img {
-  height: 160px;
-  width: 310px;
+  height: 165px;
+  width: 320px;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
-  margin-top: 5px;
 }
 
 .link {

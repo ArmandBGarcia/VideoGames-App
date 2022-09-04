@@ -1,0 +1,26 @@
+.container {
+  background-image: url("../../images/videogame.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  opacity: 70%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: end;
+}
+
+.btn {
+  font-size: 50px;
+  border: 0;
+  background-color: transparent;
+  color: #fff;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.btn:hover {
+  cursor: pointer;
+  font-size: 55px;
+}

@@ -10,7 +10,8 @@
   /* height: 50px; */
   color: #fff;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10px;
   width: 800px;
   margin-left: 190px;
 }
@@ -18,17 +19,17 @@
 .btn {
   background-color: #5c7cfa;
   color: #fff;
-  font-size: 20px;
+  font-size: 12px;
   font-weight: 700;
-  height: 15px;
   width: auto;
   border-radius: 50%;
-  height: 30px;
-  width: 30px;
+  border: 0;
+  height: 20px;
+  width: 20px;
 }
 
 .btn:hover {
   cursor: pointer;
-  background-color: #fff;
-  color: #5c7cfa;
+  background-color: #fd7e14;
+  color: #fff;
 }
