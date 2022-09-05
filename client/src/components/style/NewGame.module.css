@@ -4,8 +4,13 @@
   margin-top: 30px;
 }
 
+.contInfo {
+  margin-left: 10px;
+}
+
 .card {
   border: solid #5c7cfa 3px;
+  background-color: rgb(32, 32, 32);
   border-radius: 15px;
   height: 300px;
 }

@@ -36,6 +36,7 @@ textarea {
 
 .title {
   position: absolute;
+  color: #fd7e14;
   top: 10px;
   left: 50%;
 }
@@ -57,7 +58,7 @@ textarea {
 
 .btn {
   background-color: transparent;
-  color: #5c7cfa;
+  color: #fd7e14;
   border: 0;
   font-size: 50px;
 

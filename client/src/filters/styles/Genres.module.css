@@ -104,8 +104,30 @@
   font-size: 25px;
 }
 
+.btn2 {
+  background-color: rgb(32, 32, 32);
+  border-radius: 8px;
+  border: 0;
+  padding: 9px 9px;
+  height: 50px;
+  width: 50px;
+  color: #fff;
+  font-size: 25px;
+}
+
+.btn2:hover {
+  cursor: pointer;
+  background-color: #fff;
+  color: rgb(32, 32, 32);
+}
+
 .btn:hover {
   cursor: pointer;
   background-color: #fff;
   color: rgb(32, 32, 32);
+}
+
+.lastSpan {
+  font-size: 15px;
+  text-transform: lowercase;
 }
