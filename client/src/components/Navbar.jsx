@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <header className={s.container}>
       <nav className={s.navbar}>
-        <Link to="/home" className={s.link}>
+        <Link to="/" className={s.link}>
           <p className={s.videogame}>Videogames App</p>
         </Link>
         <SearchByName />

@@ -49,12 +49,6 @@ const validate = (game) => {
       "the length of the text must be between 20 and 150 words";
   }
 
-  if (game.strs.length === 0) {
-    error.strs = "is required at least one platform";
-  } else if (game.strs.length > 5) {
-    error.strs = "maximun five platforms";
-  }
-
   if (!game.image) {
     error.image = "image required!";
   } else if (!regex.urlImage.test(game.image)) {
@@ -65,6 +59,12 @@ const validate = (game) => {
     error.genres = "is required at least one genre";
   } else if (game.genres.length > 5) {
     error.genres = "maximun five genres per game";
+  }
+
+  if (game.strs.length === 0) {
+    error.strs = "is required at least one platform";
+  } else if (game.strs.length > 5) {
+    error.strs = "maximun five platforms";
   }
 
   return error;
@@ -103,6 +103,7 @@ const Form = () => {
       [e.target.name]: e.target.value,
     });
     console.log({ form });
+    // console.log({ error });
   };
 
   const handlePlatform = (e) => {
@@ -141,6 +142,12 @@ const Form = () => {
 
   const deletePlatform = (e) => {
     // e.preventDefault();
+    // setError(
+    //   validate({
+    //     ...form,
+    //     [e.target.name]: [e.target.value],
+    //   })
+    // );
     setForm({
       ...form,
       strs: form.strs.filter((c) => c !== e),
@@ -149,6 +156,12 @@ const Form = () => {
 
   const deleteGenre = (e) => {
     // e.preventDefault();
+    // setError(
+    //   validate({
+    //     ...form,
+    //     [e.target.name]: [e.target.value],
+    //   })
+    // );
     setForm({
       ...form,
       genres: form.genres.filter((c) => c !== e),
@@ -252,9 +265,9 @@ const Form = () => {
                 <span className={s.error}>{error.description}</span>
               ) : null}
               <br />
-              <label htmlFor="platforms">Platforms: </label>
+              <label htmlFor="strs">Platforms: </label>
               <select
-                name="platforms"
+                name="strs"
                 value={form.strs}
                 required
                 onChange={handlePlatform}
@@ -271,7 +284,7 @@ const Form = () => {
                 <span className={s.error}>{error.strs}</span>
               ) : null}
               <br />
-              <label>Genres: </label>
+              <label htmlFor="genres">Genres: </label>
               <select
                 name="genres"
                 value={form.genres}

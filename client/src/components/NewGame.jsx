@@ -23,7 +23,11 @@ const NewGame = ({ form, deleteGenre, deletePlatform }) => {
             {form.strs.map((d) => (
               <div key={d} className={s.contBtn}>
                 <span>{d}</span>
-                <button className={s.btn} onClick={() => deletePlatform(d)}>
+                <button
+                  name="strs"
+                  className={s.btn}
+                  onClick={() => deletePlatform(d)}
+                >
                   ❌
                 </button>
               </div>
@@ -34,7 +38,11 @@ const NewGame = ({ form, deleteGenre, deletePlatform }) => {
             {form.genres?.map((d) => (
               <div key={d} className={s.contBtn}>
                 <span>{d}</span>
-                <button className={s.btn} onClick={() => deleteGenre(d)}>
+                <button
+                  name="genres"
+                  className={s.btn}
+                  onClick={() => deleteGenre(d)}
+                >
                   ❌
                 </button>
               </div>
