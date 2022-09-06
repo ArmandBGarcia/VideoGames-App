@@ -57,14 +57,14 @@ const validate = (game) => {
 
   if (game.genres.length === 0) {
     error.genres = "is required at least one genre";
-  } else if (game.genres.length > 5) {
-    error.genres = "maximun five genres per game";
+  } else if (game.genres.length > 6) {
+    error.genres = "maximun 6 genres per game";
   }
 
   if (game.strs.length === 0) {
     error.strs = "is required at least one platform";
-  } else if (game.strs.length > 5) {
-    error.strs = "maximun five platforms";
+  } else if (game.strs.length > 4) {
+    error.strs = "maximun 4 platforms";
   }
 
   return error;
@@ -134,20 +134,13 @@ const Form = () => {
     setForm({
       ...form,
       genres: !form.genres.includes(e.target.value)
-        ? [...form.genres, e.target.value]
+        ? [...form.genres, e.target.value.splice(0, 4)]
         : form.genres.filter((g) => g !== e.target.value),
     });
     console.log({ form });
   };
 
   const deletePlatform = (e) => {
-    // e.preventDefault();
-    // setError(
-    //   validate({
-    //     ...form,
-    //     [e.target.name]: [e.target.value],
-    //   })
-    // );
     setForm({
       ...form,
       strs: form.strs.filter((c) => c !== e),
@@ -155,13 +148,6 @@ const Form = () => {
   };
 
   const deleteGenre = (e) => {
-    // e.preventDefault();
-    // setError(
-    //   validate({
-    //     ...form,
-    //     [e.target.name]: [e.target.value],
-    //   })
-    // );
     setForm({
       ...form,
       genres: form.genres.filter((c) => c !== e),
@@ -273,7 +259,7 @@ const Form = () => {
                 onChange={handlePlatform}
               >
                 <option value="" selected>
-                  max 5 platforms...
+                  max 4 platforms...
                 </option>
                 {platforms?.map((data) => (
                   <option value={data}>{data}</option>
@@ -292,7 +278,7 @@ const Form = () => {
                 onChange={handleGenres}
               >
                 <option value="" selected>
-                  max 5 genres...
+                  max 6 genres...
                 </option>
                 {generos?.map((data) => (
                   <option value={data.name}>{data.name}</option>

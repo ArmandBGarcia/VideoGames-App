@@ -29,6 +29,7 @@ const SearchByName = () => {
         }}
       >
         <input
+          value={name}
           className={s.input}
           type="text"
           placeholder="🔎 Search 787,351 games"

@@ -8,6 +8,15 @@ textarea {
   resize: none;
 }
 
+.platforms {
+  border: solid 1px red;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  right: 450px;
+  top: 200px;
+}
+
 .btn1 {
   background-color: transparent;
   border: 0;

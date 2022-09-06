@@ -20,7 +20,7 @@ const NewGame = ({ form, deleteGenre, deletePlatform }) => {
               <p>{form.rating}</p>
             </div>
             <p className={s.colorTitle}>Platforms: </p>
-            {form.strs.map((d) => (
+            {form.strs?.slice(0, 4).map((d) => (
               <div key={d} className={s.contBtn}>
                 <span>{d}</span>
                 <button
@@ -35,13 +35,13 @@ const NewGame = ({ form, deleteGenre, deletePlatform }) => {
           </div>
           <div className={s.contGenres}>
             <p className={s.colorTitle}>Genres: </p>
-            {form.genres?.map((d) => (
-              <div key={d} className={s.contBtn}>
-                <span>{d}</span>
+            {form.genres?.slice(0, 6).map((g) => (
+              <div key={g} className={s.contBtn}>
+                <span>{g}</span>
                 <button
                   name="genres"
                   className={s.btn}
-                  onClick={() => deleteGenre(d)}
+                  onClick={() => deleteGenre(g)}
                 >
                   ❌
                 </button>
@@ -51,7 +51,7 @@ const NewGame = ({ form, deleteGenre, deletePlatform }) => {
         </div>
         <div className={s.contDesc}>
           <p className={s.colorTitle}>Description: </p>
-          <p>{form.description}</p>
+          <p className={s.contDesc}>{form.description}</p>
         </div>
       </div>
     </div>
