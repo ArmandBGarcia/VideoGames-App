@@ -2,10 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import NewGame from "../components/NewGame.jsx";
 import platforms from "../helpers/platforms.js";
-import { createGame, getGenres } from "../redux/actions.js";
+import { createGame, getGenres, updateVideogame } from "../redux/actions.js";
 import s from "./styles/Form.module.css";
 
 const validate = (game) => {
@@ -70,7 +70,8 @@ const validate = (game) => {
   return error;
 };
 
-const Form = () => {
+const VideogameEdit = () => {
+  const { id } = useParams();
   const generos = useSelector((state) => state.genres);
 
   const dispatch = useDispatch();
@@ -164,7 +165,7 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createGame(form));
+    dispatch(updateVideogame(id, form));
     setForm({
       released: "",
       name: "",
@@ -336,4 +337,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default VideogameEdit;

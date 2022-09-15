@@ -1,5 +1,6 @@
 import {
   CREATE_GAME,
+  DELETE_GAME,
   FILTER_BY_GENRE,
   GET_GAMES,
   GET_GAMES_BY_NAME,
@@ -9,6 +10,7 @@ import {
   GET_GENRES,
   SORT_BY_NAME,
   SORT_BY_RATING,
+  UPDATE_GAME,
 } from "./actions";
 
 const initialState = {
@@ -16,6 +18,7 @@ const initialState = {
   gameDetail: [],
   genres: [],
   newGame: {},
+  gameUpdated: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -74,6 +77,22 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         videogames: action.payload,
+      };
+    case UPDATE_GAME:
+      if (action.payload.error) {
+        alert(action.payload.error);
+        return state;
+      }
+      return {
+        ...state,
+        gameUpdated: action.payload,
+      };
+    case DELETE_GAME:
+      return {
+        ...state,
+        videogames: state.videogames.filter(
+          (game) => game.id !== action.payload
+        ),
       };
 
     default:

@@ -1,4 +1,5 @@
 const express = require("express");
+const { Videogame } = require("../db.js");
 const {
   getVideogamesApi,
   getVideogameByName,
@@ -6,6 +7,7 @@ const {
   createGame,
   getVideogamesDb,
   getAllGames,
+  updateGame,
 } = require("./controller");
 const server = express();
 
@@ -69,6 +71,41 @@ server.post("/", async (req, res) => {
     return res.status(200).json(newgame);
   } catch (e) {
     return res.status(400).json({ error: e });
+  }
+});
+
+server.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { released, name, image, rating, description, strs, genres } = req.body;
+  const platforms = strs.join(" ");
+  console.log(released, name, image, rating, description, platforms, genres);
+  try {
+    const gameUpdated = await updateGame(id, {
+      released,
+      name,
+      image,
+      rating,
+      description,
+      platforms,
+      genres,
+    });
+    return res.status(200).json(gameUpdated);
+  } catch (e) {
+    return res.status(400).json({ error: e });
+  }
+});
+
+server.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Videogame.destroy({
+      where: {
+        id,
+      },
+    });
+    res.status(202).send("Videogame deleted successfully");
+  } catch (error) {
+    res.status(400).send("the request could not be processed");
   }
 });
 

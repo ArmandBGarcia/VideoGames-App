@@ -9,12 +9,15 @@ export const GET_GAME_BY_ID = "GET_GAME_BY_ID";
 export const GET_GENRES = "GET_GENRES";
 export const CREATE_GAME = "CREATE_GAME";
 export const SORT_BY_RATING = "SORT_BY_RATING";
+export const UPDATE_GAME = "UPDATE_GAME";
+export const DELETE_GAME = "DELETE_GAME";
 
 export const getVideogames = () => {
   const url = "http://localhost:3001/videogames";
   return async (dispatch) => {
     try {
       const response = await axios.get(url);
+      console.log({ response });
       return dispatch({
         type: GET_GAMES,
         payload: response.data,
@@ -110,7 +113,7 @@ export const sortByRating = (value) => {
     try {
       const response = await axios.get(url);
       const rating = response.data;
-      // console.log({ rating });
+      console.log({ rating });
       if (value === "asc") {
         const sorted = rating.sort((a, b) => {
           return a.rating - b.rating;
@@ -218,5 +221,35 @@ export const createGame = (obj) => {
       .catch((error) => {
         return alert("Please, send the information correctly");
       });
+  };
+};
+
+export const updateVideogame = (id, obj) => {
+  const url = `http://localhost:3001/videogames/${id}`;
+  const options = {
+    method: "PUT",
+    headers: { "Content-Type": "Application/json" },
+    body: JSON.stringify(obj),
+  };
+  return async function (dispatch) {
+    return await fetch(url, options)
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: UPDATE_GAME, payload: data });
+        alert(data);
+      });
+  };
+};
+
+export const deleteVideogame = (id) => {
+  const url = `http://localhost:3001/videogames/delete/${id}`;
+  return async function (dispatch) {
+    const response = await axios.delete(url);
+    console.log("this is", response.data);
+    dispatch({
+      type: DELETE_GAME,
+      payload: id,
+    });
+    alert(response.data);
   };
 };

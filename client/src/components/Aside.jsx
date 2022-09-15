@@ -18,13 +18,13 @@ const Aside = () => {
         <br />
         <br />
         <br />
+        <FilterByGenres />
+        <br />
         <SortApiOrDb />
         <br />
         <SortByRating />
         <br />
         <SortByName />
-        <br />
-        <FilterByGenres />
       </aside>
     </div>
   );

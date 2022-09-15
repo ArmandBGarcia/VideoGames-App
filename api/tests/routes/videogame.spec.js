@@ -11,7 +11,7 @@ const videogame = {
     "https://media.gqmagazine.fr/photos/61fa5fd36ec921138030b144/1:1/w_1600%2Cc_limit/GettyImages-1309172130.jpg",
   description: "game to past the time",
   rating: 5,
-  released: "12/08/2020",
+  released: 12 / 08 / 2020,
   plarforms: "PlayStation, Xbox, Nintendo",
   genres: ["Adventure"],
 };

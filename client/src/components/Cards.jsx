@@ -3,13 +3,13 @@ import Card from "./Card";
 import s from "./style/Card.module.css";
 
 const Cards = ({ currentGames }) => {
-  let id = 0;
+  // let id = 0;
   // console.log({ games });
   return (
     <div className={s.cards}>
       {currentGames.map((g) => (
         <Card
-          key={id}
+          key={g.id}
           id={g.id}
           name={g.name}
           image={g.image}

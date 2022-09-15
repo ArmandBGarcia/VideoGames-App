@@ -227,7 +227,7 @@ const FilterByGenres = () => {
                     <span>Educational</span>
                   </div>
                 </li>
-                <li>
+                {/* <li>
                   <div className={s.contBtn}>
                     <button
                       className={s.btn}
@@ -237,7 +237,7 @@ const FilterByGenres = () => {
                     </button>
                     <span>All</span>
                   </div>
-                </li>
+                </li> */}
               </ul>
             </li>
           </ul>

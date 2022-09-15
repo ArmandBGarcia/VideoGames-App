@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import s from "./style/Game.module.css";
 
-const Detail = ({ game }) => {
-  console.log({ game });
+const Detail = ({ game, id }) => {
+  // console.log({ game });
   return !game.length ? (
     <div className={s.container}>
       <div className={s.title}>
@@ -64,7 +64,7 @@ const Detail = ({ game }) => {
                 <img src={game.image} alt={game.name} className={s.image} />
               </div>
               <div className={s.info}>
-                <div className={s.infoContainres}>
+                <div>
                   <p className={s.nameColor}>Relased date: </p>
                   <p className={s.date}>{game.released}</p>
                 </div>
@@ -91,6 +91,13 @@ const Detail = ({ game }) => {
                   {game.description}
                 </p>
               </div>
+            </div>
+            <div>
+              <Link to={`/game/edit/${id}`}>
+                <button>
+                  <ion-icon name="create-outline"></ion-icon>
+                </button>
+              </Link>
             </div>
           </div>
         </div>

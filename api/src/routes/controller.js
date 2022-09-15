@@ -10,9 +10,7 @@ const getVideogamesApi = async () => {
     const url = `https://api.rawg.io/api/games?key=${API_KEY}&page_size=40`;
     const response = await axios.get(url);
     const response2 = await axios.get(response.data.next);
-    const response3 = await axios.get(
-      `https://api.rawg.io/api/games?key=${API_KEY}&page_size=20`
-    );
+    const response3 = await axios.get(response2.data.next);
 
     const result1 = response.data.results.map((data) => {
       return {
@@ -23,6 +21,7 @@ const getVideogamesApi = async () => {
         genres: data.genres.map((g) => g.name.toLowerCase()),
       };
     });
+    // console.log(result1);
 
     const result2 = response2.data.results.map((data) => {
       return {
@@ -213,6 +212,42 @@ const createGame = async (obj) => {
   return "Videogame created succesfully!!";
 };
 
+const updateGame = async (id, obj) => {
+  const { name, image, description, rating, released, platforms, genres } = obj;
+  if (
+    !name ||
+    !image ||
+    !description ||
+    !rating ||
+    !released ||
+    !platforms ||
+    !genres.length
+  ) {
+    throw "It is not allowed to update fields without information";
+  }
+
+  if (id.length > 10) {
+    const gToUpdate = await Videogame.findByPk(id);
+    if (gToUpdate) {
+      let newValues = {
+        name,
+        image,
+        description,
+        rating,
+        released,
+        platforms,
+        genres,
+      };
+      Videogame.update(newValues, {
+        where: { id },
+      });
+      return "Successfully update videogame";
+    } else {
+      throw "Videogame not found";
+    }
+  }
+};
+
 module.exports = {
   getVideogamesApi,
   getVideogameByName,
@@ -221,4 +256,5 @@ module.exports = {
   createGame,
   getVideogamesDb,
   getAllGames,
+  updateGame,
 };

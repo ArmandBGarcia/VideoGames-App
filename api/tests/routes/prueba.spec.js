@@ -15,6 +15,6 @@ const agent = session(app);
 
 describe("Test de la ruta videogames", () => {
   describe("GET /", () => {
-    it("response with 200", () => agent.get("/").expect(404));
+    it("response with 200", () => agent.get("/videogames").expect(200));
   });
 });

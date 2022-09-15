@@ -24,7 +24,7 @@ const Game = () => {
         </button>
       </Link>
       {game.hasOwnProperty("name") || game.length ? (
-        <Detail game={game} />
+        <Detail game={game} id={id} />
       ) : (
         <Loader />
       )}
