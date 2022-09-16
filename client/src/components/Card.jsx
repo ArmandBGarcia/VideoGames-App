@@ -15,14 +15,16 @@ const Card = ({ key, id, name, image, genres, rating }) => {
           <h4 className={s.name}>{name}</h4>
         </div>
         <div className={s.genres}>
-          {genres?.map((g) => (
+          {genres?.splice(0, 3).map((g) => (
             <p>{g}</p>
           ))}
         </div>
         <p className={s.rating}>{rating}</p>
       </Link>
       {id.length > 10 ? (
-        <button onClick={() => dispatch(deleteVideogame(id))}>X</button>
+        <button className={s.btn} onClick={() => dispatch(deleteVideogame(id))}>
+          <ion-icon name="trash"></ion-icon>
+        </button>
       ) : null}
     </div>
   );

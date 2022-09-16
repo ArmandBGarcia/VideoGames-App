@@ -86,6 +86,7 @@ function getVideogameByName(game) {
   const response = axios
     .get(url)
     .then((resp) => {
+      // const games = resp.data.results.slplice(0,15).map
       const games = resp.data.results.map((d) => {
         return {
           id: d.id,

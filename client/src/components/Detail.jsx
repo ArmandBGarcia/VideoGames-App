@@ -94,7 +94,7 @@ const Detail = ({ game, id }) => {
             </div>
             <div>
               <Link to={`/game/edit/${id}`}>
-                <button>
+                <button className={s.btn2}>
                   <ion-icon name="create-outline"></ion-icon>
                 </button>
               </Link>

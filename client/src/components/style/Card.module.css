@@ -74,6 +74,21 @@ body {
   color: #fff;
 }
 
+.btn {
+  font-size: 25px;
+  border: 0;
+  background-color: transparent;
+  color: #fff;
+  position: absolute;
+  left: 15px;
+  bottom: 10px;
+}
+
+.btn:hover {
+  cursor: pointer;
+  color: #fd7e14;
+}
+
 /* .image:hover {
   cursor: pointer;
 } */

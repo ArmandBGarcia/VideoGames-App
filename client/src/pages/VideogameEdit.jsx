@@ -185,11 +185,11 @@ const VideogameEdit = () => {
         </button>
       </Link>
       <div className={s.container}>
-        <h1 className={s.title}>New Game!!</h1>
+        <h1 className={s.title}>Video Game Edit</h1>
         <div className={s.containerInfo}>
           <form>
             <fieldset>
-              <legend>please type the new game info</legend>
+              <legend>please type the new info</legend>
               <br />
               <label htmlFor="name">Name: </label>
               <input
