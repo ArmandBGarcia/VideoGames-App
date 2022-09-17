@@ -248,6 +248,7 @@ const Form = () => {
               <label htmlFor="description">Description: </label>
               <br />
               <textarea
+                className={s.textarea}
                 onChange={handleChange}
                 name="description"
                 value={form.description}

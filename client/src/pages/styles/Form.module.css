@@ -2,7 +2,7 @@
 /* rgb(32, 32, 32) */
 /* #5c7cfa */
 
-textarea {
+.textarea {
   height: 100px;
   width: 70%;
   resize: none;

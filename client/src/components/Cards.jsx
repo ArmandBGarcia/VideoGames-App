@@ -15,6 +15,7 @@ const Cards = ({ currentGames }) => {
           image={g.image}
           rating={g.rating}
           genres={g.genres.map((d) => (d.name ? d.name : d))}
+          platforms={g.platforms}
         />
       ))}
     </div>

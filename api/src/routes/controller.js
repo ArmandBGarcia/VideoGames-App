@@ -19,6 +19,7 @@ const getVideogamesApi = async () => {
         image: data.background_image,
         rating: data.rating,
         genres: data.genres.map((g) => g.name.toLowerCase()),
+        platforms: data.platforms.map((d) => d.platform.name).join(", "),
       };
     });
     // console.log(result1);
@@ -30,6 +31,7 @@ const getVideogamesApi = async () => {
         image: data.background_image,
         rating: data.rating,
         genres: data.genres.map((g) => g.name.toLowerCase()),
+        platforms: data.platforms.map((d) => d.platform.name).join(", "),
       };
     });
 
@@ -40,6 +42,7 @@ const getVideogamesApi = async () => {
         image: data.background_image,
         rating: data.rating,
         genres: data.genres.map((g) => g.name.toLowerCase()),
+        platforms: data.platforms.map((d) => d.platform.name).join(", "),
       };
     });
 
@@ -97,7 +100,12 @@ function getVideogameByName(game) {
       });
       // easy to read this line
       // console.log(games.length);
-      return games.length ? games : "the game was not found";
+      //  games.length ? games : "the game was not found";
+      if (games) {
+        return games;
+      } else {
+        throw "the game was not found";
+      }
     })
     .catch((error) => console.log(error));
 

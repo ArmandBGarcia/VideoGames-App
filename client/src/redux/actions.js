@@ -32,8 +32,9 @@ export function getGameByName(name) {
   const url = `http://localhost:3001/videogames?name=${name}`;
   return (dispatch) => {
     axios(url)
-      .then((resp) => resp.data)
+      .then((resp) => (resp.data ? resp.data : alert("no one game found")))
       .then((json) => {
+        // console.log("x", json);
         dispatch({
           type: GET_GAMES_BY_NAME,
           payload: json,
@@ -236,7 +237,7 @@ export const updateVideogame = (id, obj) => {
       .then((response) => response.json())
       .then((data) => {
         dispatch({ type: UPDATE_GAME, payload: data });
-        alert(data);
+        // alert(data);
       });
   };
 };

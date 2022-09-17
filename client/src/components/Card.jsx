@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import s from "./style/Card.module.css";
 import { deleteVideogame } from "../redux/actions";
 
-const Card = ({ key, id, name, image, genres, rating }) => {
+const Card = ({ key, id, name, image, genres, rating, platforms }) => {
   // console.log({ key });
   const dispatch = useDispatch();
   return (
@@ -18,6 +18,9 @@ const Card = ({ key, id, name, image, genres, rating }) => {
           {genres?.splice(0, 3).map((g) => (
             <p>{g}</p>
           ))}
+        </div>
+        <div>
+          <p>{platforms}</p>
         </div>
         <p className={s.rating}>{rating}</p>
       </Link>
