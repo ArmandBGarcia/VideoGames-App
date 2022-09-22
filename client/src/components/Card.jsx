@@ -19,9 +19,11 @@ const Card = ({ key, id, name, image, genres, rating, platforms }) => {
             <p>{g}</p>
           ))}
         </div>
-        <div>
-          <p>{platforms}</p>
-        </div>
+        {/* <div>
+          {platforms?.splice(0, 3).map((p) => (
+            <p>{p}</p>
+          ))}
+        </div> */}
         <p className={s.rating}>{rating}</p>
       </Link>
       {id.length > 10 ? (

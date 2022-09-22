@@ -1,7 +1,10 @@
 .container {
   display: flex;
-  margin-top: 15%;
+  flex-direction: column;
+  margin-top: 12%;
   margin-left: 31%;
+  /* border: solid red 3px; */
+  width: 500px;
 }
 
 .containerForm {
@@ -43,4 +46,69 @@
   width: 450px;
   height: 100px;
   border-radius: 6px;
+}
+
+a .btnWhats {
+  font-size: 50px;
+  background-color: transparent;
+  border: 0;
+  color: rgb(75, 201, 89);
+  margin-bottom: 5px;
+}
+
+.btnWhats:hover {
+  cursor: pointer;
+}
+
+.btnLinkedin {
+  font-size: 50px;
+  background-color: transparent;
+  border: 0;
+  color: #0a66c2;
+  margin-bottom: 5px;
+}
+
+.btnLinkedin:hover {
+  cursor: pointer;
+}
+
+.btnGithub {
+  font-size: 50px;
+  background-color: transparent;
+  border: 0;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.btnGithub {
+  cursor: pointer;
+}
+
+.contButtons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btnArrow {
+  background-color: transparent;
+  /* margin-top: 50px; */
+  border: 0;
+  color: #5c7cfa;
+  font-size: 50px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  position: absolute;
+  left: 150px;
+  top: 40px;
+}
+
+.btnArrow:hover {
+  cursor: pointer;
+}
+
+.parrafo {
+  position: absolute;
+  font-size: 18px;
+  top: 110px;
+  left: 10%;
 }

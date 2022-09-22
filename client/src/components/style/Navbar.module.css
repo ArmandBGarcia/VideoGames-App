@@ -32,27 +32,39 @@
 
 .about {
   text-transform: capitalize;
-  font-style: italic;
-  font-weight: 300;
+  font-weight: 700;
   font-size: 24px;
   /* color: #fff; */
-  color: #5c7cfa;
+  /* color: #5c7cfa; */
+  color: #fd7e14;
   margin-left: 0px;
 }
 
-.contact {
+/* .contact {
   text-transform: capitalize;
   font-style: italic;
   font-weight: 300;
   font-size: 20px;
   color: #5c7cfa;
+} */
+
+.contact {
+  font-size: 30px;
 }
 
 .about:hover {
   cursor: pointer;
-  color: #fd7e14;
+  color: #5c7cfa;
 }
 
 .contact:hover {
   color: #fd7e14;
+}
+
+.btnContact {
+  border-radius: 50%;
+}
+
+.btnContact {
+  cursor: pointer;
 }
