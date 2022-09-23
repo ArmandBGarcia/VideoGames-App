@@ -30,17 +30,29 @@ export const getVideogames = () => {
 
 export function getGameByName(name) {
   const url = `http://localhost:3001/videogames?name=${name}`;
-  return (dispatch) => {
-    axios(url)
-      .then((resp) => (resp.data ? resp.data : alert("no one game found")))
-      .then((json) => {
-        // console.log("x", json);
+  return async (dispatch) => {
+    try {
+      const response = await axios(url);
+      console.log({ response });
+      if (response.data.length === 0) {
+        alert("No one game found");
+      } else {
         dispatch({
           type: GET_GAMES_BY_NAME,
-          payload: json,
+          payload: response.data,
         });
-      })
-      .catch((e) => console.log(e));
+      }
+    } catch (error) {
+      alert(error);
+    }
+    // .then((resp) => (resp.data ? resp.data : alert("no one game found")))
+    // .then((json) => {
+    //   dispatch({
+    //     type: GET_GAMES_BY_NAME,
+    //     payload: json,
+    //   });
+    // })
+    // .catch((e) => console.log(e));
   };
 }
 

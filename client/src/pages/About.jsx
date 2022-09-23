@@ -37,6 +37,12 @@ const About = () => {
         </p>
         <br />
         <p className={s.description}>
+          The CRUD of the database was implemented to be able to read the
+          information of the video games, create new games, update them and
+          delete them
+        </p>
+        <br />
+        <p className={s.description}>
           Everything is connected and working at the same time, the front-end
           receives and sends information to the back-end, the back-end sends
           information to the front-end and to the database, and makes requests

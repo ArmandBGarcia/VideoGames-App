@@ -185,7 +185,7 @@ const VideogameEdit = () => {
         </button>
       </Link>
       <div className={s.container}>
-        <h1 className={s.title}>Video Game Edit</h1>
+        <h1 className={s.title}>Video Game Edit Page</h1>
         <div className={s.containerInfo}>
           <form>
             <fieldset>
